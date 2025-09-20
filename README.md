@@ -1,35 +1,298 @@
-# AI-Enhanced Career Guidance and Monitoring System
+# AI-Enhanced Career Guidance System
 
-### Project Description
-[cite_start]The **AI-Enhanced Career Guidance and Monitoring System** is an innovative platform developed by Team Debug Dynamos[cite: 1]. [cite_start]It is designed to combat career confusion and help young people make informed professional decisions[cite: 2]. [cite_start]The system provides personalized, data-driven career recommendations by integrating a web and mobile application with specialized hardware devices[cite: 10].
+A comprehensive web application that provides AI-powered career recommendations using machine learning, real-time monitoring through ESP32 integration, and parent portal functionality.
 
-### Key Features
-* [cite_start]**Smart Profiling**: The platform collects comprehensive user data, including academic performance, personal interests, and psychometric assessments, to generate highly relevant career matches[cite: 11, 46].
-* [cite_start]**Focus Tracking**: Unique to this system is its **hardware monitoring capability**[cite: 13]. [cite_start]Wearable devices continuously track a user's focus and activity levels to ensure that career suggestions are practically achievable based on real-world behavior and attention patterns[cite: 13, 39, 46].
-* [cite_start]**Personalized Roadmap**: The system provides a dynamic dashboard that presents tailored career recommendations, skill development paths, course suggestions, and internship opportunities[cite: 44, 45].
-* [cite_start]**Market Insights**: The platform is designed to offer insights into the job market, helping users understand current trends and demand[cite: 29].
+## 🌟 Features
 
-### Technology Stack
-* [cite_start]**Backend**: Python with the Flask framework for robust data processing and AI computations[cite: 22, 23].
-* [cite_start]**Frontend**: JavaScript with React to create a responsive and intuitive user interface for web and mobile platforms[cite: 24, 25].
-* **AI/ML**: The system leverages Scikit-learn for machine learning models, spaCy for natural language processing, and MySQL for secure data management. [cite_start]It also integrates with the O\*NET API for up-to-date industry trends[cite: 28, 29].
-* [cite_start]**Hardware Integration**: C++ firmware on Arduino/ESP32 platforms enables real-time sensor data collection via Bluetooth and MQTT protocols, bridging physical activity with digital insights[cite: 26, 27].
+- **AI-Powered Career Recommendations**: Uses scikit-learn Decision Tree classifier for personalized career suggestions
+- **NLP Interest Extraction**: Leverages spaCy for intelligent interest analysis
+- **Real-time Monitoring**: ESP32 integration with MQTT for focus tracking
+- **Parent Portal**: Monitor student progress and study habits
+- **Modern UI**: Beautiful React frontend with responsive design
+- **RESTful API**: Flask backend with comprehensive endpoints
 
-### Goals and Vision
-* [cite_start]**Immediate Goals**: To collect and analyze user data to deliver personalized career suggestions while monitoring real-world activities to ensure feasibility and alignment with individual capabilities[cite: 16].
-* [cite_start]**Expected Outcomes**: To significantly reduce career confusion by providing clear skill development roadmaps and targeted opportunities that match user focus patterns[cite: 18].
-* [cite_start]**Long-Term Vision**: To scale the platform globally, integrating VR career simulations and predictive job market analytics to create the ultimate career guidance ecosystem[cite: 20].
+## 🏗️ Architecture
 
-### Development Roadmap
-The project has a phased development roadmap:
-1.  [cite_start]**Research & Planning**: Completed[cite: 49, 50].
-2.  [cite_start]**Prototype Development**: 70% complete, with a functional demo ready[cite: 54, 55].
-3.  [cite_start]**User Testing**: In progress, involving pilot testing with select user groups to validate accuracy and user experience[cite: 58, 59].
-4.  [cite_start]**Full Deployment**: Planned, including AWS cloud hosting and mobile app store releases[cite: 61, 62, 63].
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   React Frontend│    │  Flask Backend  │    │   MQTT Broker   │
+│   (Port 3000)   │◄──►│   (Port 5000)   │◄──►│  (Port 1883)    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+                              │                        │
+                              ▼                        │
+                       ┌─────────────────┐             │
+                       │  SQLite Database│             │
+                       └─────────────────┘             │
+                                                       │
+                       ┌─────────────────┐             │
+                       │     ESP32       │─────────────┘
+                       │  (Focus Sensor) │
+                       └─────────────────┘
+```
 
-### Team
-Team Debug Dynamos consists of four members with specialized roles:
-* [cite_start]**Sohom Roy**: Backend Developer[cite: 4].
-* [cite_start]**Priyajali Dutta**: UI/UX Designer[cite: 4].
-* [cite_start]**Dinesh Baidya**: AI-ML and Tools Expert[cite: 4].
-* [cite_start]**Palash Jana**: Frontend Developer[cite: 4].
+## 🚀 Quick Start
+
+### Prerequisites
+
+- **Python 3.10+** (for backend)
+- **Node.js 18+** and **npm** (for frontend)
+- **MQTT Broker** (Mosquitto recommended)
+
+### Installation
+
+1. **Clone/Download the project**
+   ```bash
+   # The project structure is already set up
+   cd "C:\Users\PALAS\OneDrive\Desktop\New folder (3)"
+   ```
+
+2. **Backend Setup**
+   ```bash
+   cd backend
+   pip install -r requirements.txt
+   python -m spacy download en_core_web_sm
+   ```
+
+3. **Frontend Setup**
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+4. **MQTT Broker Setup**
+   
+   **Windows:**
+   ```bash
+   # Download Mosquitto from https://mosquitto.org/download/
+   # Or use chocolatey:
+   choco install mosquitto
+   
+   # Start the broker
+   mosquitto -v
+   ```
+   
+   **macOS:**
+   ```bash
+   brew install mosquitto
+   mosquitto -v
+   ```
+   
+   **Linux:**
+   ```bash
+   sudo apt-get install mosquitto mosquitto-clients
+   sudo systemctl start mosquitto
+   ```
+
+### Running the Application
+
+1. **Start MQTT Broker** (in a separate terminal)
+   ```bash
+   mosquitto -v
+   ```
+
+2. **Start Backend** (in a separate terminal)
+   ```bash
+   cd backend
+   python app.py
+   ```
+   Backend will be available at: http://localhost:5000
+
+3. **Start Frontend** (in a separate terminal)
+   ```bash
+   cd frontend
+   npm start
+   ```
+   Frontend will be available at: http://localhost:3000
+
+## 📱 Usage
+
+### For Students
+
+1. **Register**: Visit http://localhost:3000 and fill out the registration form
+2. **Get Recommendations**: Update your interests and scores to get AI-powered career suggestions
+3. **View Roadmap**: See detailed career paths with skills, courses, and internships
+
+### For Parents
+
+1. **Access Parent Portal**: Use the link provided after student registration
+2. **Monitor Progress**: View real-time focus data from ESP32 sensors
+3. **Track Statistics**: See focus rates and study patterns
+
+### ESP32 Integration
+
+The system expects ESP32 to publish MQTT messages to:
+- **Topic**: `monitor/{user_id}/focus`
+- **Payload**: `"true"` (focused) or `"false"` (distracted)
+
+Example ESP32 code snippet:
+```cpp
+#include <WiFi.h>
+#include <PubSubClient.h>
+
+// MQTT setup
+const char* mqtt_server = "your_broker_ip";
+const int mqtt_port = 1883;
+const char* topic = "monitor/1/focus"; // Replace 1 with actual user_id
+
+void publishFocusStatus(bool isFocused) {
+  String payload = isFocused ? "true" : "false";
+  client.publish(topic, payload.c_str());
+}
+```
+
+## 🔧 API Endpoints
+
+### Backend API (http://localhost:5000)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/register` | Register a new user |
+| POST | `/api/recommend` | Get career recommendations |
+| GET | `/api/parent/<user_id>` | Get monitoring data for parent |
+| GET | `/api/user/<user_id>` | Get user information |
+| GET | `/api/health` | Health check |
+
+### Example API Usage
+
+**Register a user:**
+```bash
+curl -X POST http://localhost:5000/api/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "John Doe",
+    "email": "john@example.com",
+    "interests": "coding, mathematics, problem solving",
+    "skills": "Python, JavaScript, SQL",
+    "scores": "Math:85,Science:90",
+    "parent_email": "parent@example.com"
+  }'
+```
+
+**Get recommendations:**
+```bash
+curl -X POST http://localhost:5000/api/recommend \
+  -H "Content-Type: application/json" \
+  -d '{
+    "interests": "coding, artificial intelligence",
+    "scores": "Math:90,Science:85"
+  }'
+```
+
+## 🧪 Testing
+
+### Manual Testing
+
+1. **Test Registration**: Register a new user and verify database entry
+2. **Test Recommendations**: Submit interests and scores, verify AI response
+3. **Test MQTT**: Publish test messages to verify monitoring
+4. **Test Parent Portal**: Access parent view and verify data display
+
+### MQTT Testing
+
+Use MQTT client tools to test the integration:
+
+```bash
+# Install MQTT client (if not already installed)
+pip install paho-mqtt
+
+# Test publishing focus data
+mosquitto_pub -h localhost -t "monitor/1/focus" -m "true"
+mosquitto_pub -h localhost -t "monitor/1/focus" -m "false"
+```
+
+## 🔍 Troubleshooting
+
+### Common Issues
+
+1. **spaCy model not found**
+   ```bash
+   python -m spacy download en_core_web_sm
+   ```
+
+2. **MQTT connection failed**
+   - Ensure Mosquitto broker is running
+   - Check firewall settings
+   - Verify broker address and port
+
+3. **CORS errors**
+   - Ensure Flask-CORS is installed
+   - Check that backend is running on port 5000
+
+4. **Database errors**
+   - Delete `users.db` file to reset database
+   - Restart the backend application
+
+### Logs and Debugging
+
+- **Backend logs**: Check terminal where `python app.py` is running
+- **Frontend logs**: Check browser console (F12)
+- **MQTT logs**: Check Mosquitto broker output
+
+## 🚀 Production Deployment
+
+### Backend (Flask)
+- Deploy to Heroku, AWS, or similar
+- Use PostgreSQL instead of SQLite
+- Set up proper environment variables
+- Configure production MQTT broker
+
+### Frontend (React)
+- Deploy to Vercel, Netlify, or similar
+- Update API endpoints to production URLs
+- Configure build optimizations
+
+### Database
+- Migrate from SQLite to PostgreSQL/MySQL
+- Set up database backups
+- Configure connection pooling
+
+## 📊 Machine Learning Model
+
+The system uses a Decision Tree classifier trained on synthetic data. For production:
+
+1. **Replace with real dataset** (e.g., from Kaggle)
+2. **Implement more sophisticated models** (Random Forest, Neural Networks)
+3. **Add feature engineering** for better predictions
+4. **Implement model retraining** pipeline
+
+## 🔒 Security Considerations
+
+- Add user authentication (JWT tokens)
+- Implement input validation and sanitization
+- Use HTTPS in production
+- Secure MQTT broker with authentication
+- Add rate limiting to API endpoints
+
+## 📈 Future Enhancements
+
+- **Real-time notifications** for parents
+- **Advanced analytics** and reporting
+- **Mobile app** for students and parents
+- **Integration with learning management systems**
+- **Gamification** features for student engagement
+- **Video analysis** for focus detection
+- **Multi-language support**
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## 📄 License
+
+This project is open source and available under the MIT License.
+
+## 🆘 Support
+
+For issues and questions:
+1. Check the troubleshooting section
+2. Review the logs for error messages
+3. Create an issue with detailed description
+4. Include system information and error logs
+
+---
+
+**Built with ❤️ using Flask, React, scikit-learn, and MQTT**
