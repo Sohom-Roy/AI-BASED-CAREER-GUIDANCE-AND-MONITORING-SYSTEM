@@ -1,0 +1,7 @@
+flask
+flask-cors
+scikit-learn
+spacy
+paho-mqtt
+pandas
+flask-sqlalchemy
